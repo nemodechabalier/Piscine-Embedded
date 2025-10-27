@@ -14,8 +14,8 @@ void display (uint8_t value) {
 
 int main(void) {
     // Configuration
-    DDRD &= ~(1 << PD2) | ~(1 << PD4); // PD4 en entrée (bouton)
-    PORTD |= (1 << PD2) | (1 << PD4); // Pull-up activé sur PD4
+    DDRD &= ~(1 << PD2) | ~(1 << PD4); // PD2 PD4 en entrée (bouton)
+    PORTD |= (1 << PD2) | (1 << PD4); // Pull-up activé sur PD2 PD4
     DDRB |= (1 << PB0) | (1 << PB1) | (1 << PB2) | (1 << PB4);  // PB0 en sortie (LED)
     uint8_t value = 0;
 
