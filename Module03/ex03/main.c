@@ -12,6 +12,11 @@
 
 #define UBRR_VALUE (F_CPU/(8 * BAUD) - 1)
 
+
+#define RED_GAIN   1.0
+#define GREEN_GAIN 0.6
+#define BLUE_GAIN  0.8
+
 //UBRR0L = (uint8_t)UBRR_VALUE;
 //UBRR0H = (uint8_t)(UBRR_VALUE >> 8);
 
@@ -40,15 +45,31 @@ void uart_init(){
     //activer le double speed 
 }
 
+//#include <math.h>
+
+//uint8_t gamma_correct(uint8_t val) {
+//    float normalized = val / 255.0f;
+//    float corrected = pow(normalized, 2.2); // gamma = 2.2
+//    return (uint8_t)(corrected * 255.0f);
+//}
+
+//uint8_t apply_rgb_correction(uint8_t value, float gain) {
+//    float corrected = value * gain;
+//    if (corrected > 255.0f) corrected = 255.0f;
+//    return (uint8_t)corrected;
+//}
+
+//void set_rgb(uint8_t r, uint8_t g, uint8_t b) {
+//    OCR0B = apply_rgb_correction(r, RED_GAIN);
+//    OCR0A = apply_rgb_correction(g, GREEN_GAIN);
+//    OCR2B = apply_rgb_correction(b, BLUE_GAIN);
+//}
+
 void set_rgb(uint8_t r, uint8_t g, uint8_t b){
     OCR0A = g;
     OCR0B = r;
     OCR2B = b;
 }
-
-
-
-#include <stdint.h>
 
 // Retourne 0..15 pour un chiffre hex valide, 0xFF sinon
 uint8_t hex_char_to_val(char c) {
